@@ -175,10 +175,8 @@ $(function() {
                 itemSelector: '.article',
                 transitionDuration: 0
             });
-            $blog.css('opacity', 0);
             $blog.imagesLoaded().progress(function() {
                 $blog.masonry('layout');
-                $blog.css('opacity', 1);
             });
         },
         loadContent: function(url, target) {
