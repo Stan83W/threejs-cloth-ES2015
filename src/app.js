@@ -1,11 +1,12 @@
+import TextureLoader from 'three';
 import MainScene from './scenes/main.js';
 import Cloth from './models/cloth';
 import ClothView from './views/cloth.js';
 
-const mainScene = new MainScene();
+var mainScene = new MainScene();
 
-const cloth = new Cloth();
-const clothView = new ClothView(cloth);
+var cloth = new Cloth(10,13);
+var clothView = new ClothView(cloth,'textures/flag.jpg');
 
 mainScene.scene.add(clothView.mesh);
 
@@ -17,5 +18,6 @@ function animate() {
   clothView.update();
   mainScene.render();
 }
+
 
 animate();

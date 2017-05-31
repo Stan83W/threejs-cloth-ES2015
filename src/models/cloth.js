@@ -8,10 +8,13 @@ import Particle from './particle';
 export default class Cloth {
 
   constructor(w, h) {
-    this.w = w || 10;
+    this.w = w || 15;
     this.h = h || 10;
     this.lastTime = null;
-    this.pins = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    this.pins = [];
+    for (var i = 0; i <= this.w; i++) {
+      this.pins.push(i);
+    }
     this.tmpForce = new Vector3();
     this.diff = new Vector3();
     this.clothFunction = utils.plane(
@@ -138,6 +141,15 @@ export default class Cloth {
     }
   }
 
+  size(w,h) {
+    this.w = w || 10;
+    this.h = h || 15;
+    this.pins = [];
+    for (var i = 0; i <= this.w; i++) {
+      this.pins[i] = i;
+    }
+  }
+
   satisfyConstrains() {
     for (let i = 0; i < this.constrains.length; i++) {
       const constrain = this.constrains[i];
@@ -159,8 +171,9 @@ export default class Cloth {
   }
 
   pinConstrains() {
+    let numParticles = this.particles.length;
     for (let i = 0; i < this.pins.length; i++) {
-      const xy = this.pins[i];
+      const xy = numParticles - this.pins[i] - 1;
       const p = this.particles[xy];
       p.position.copy(p.original);
       p.previous.copy(p.original);

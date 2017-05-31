@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/app.kirby.js',
   output: {
     path: './public/scripts',
     filename: 'app.bundle.js',

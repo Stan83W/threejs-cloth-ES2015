@@ -22,16 +22,16 @@ export default class MainScene {
     this.camera = new PerspectiveCamera(
       30, window.innerWidth / window.innerHeight, 1, 10000
     );
-    this.camera.position.x = 1000;
+    this.camera.position.x = 0;
     this.camera.position.y = 50;
     this.camera.position.z = 1500;
     this.scene.add(this.camera);
   }
 
   lights() {
-    this.scene.add(new AmbientLight(0x111111));
+    this.scene.add(new AmbientLight(0xd1d1d1, 0.5));
 
-    this.light = new DirectionalLight(0x555555, 0.75);
+    this.light = new DirectionalLight(0xffffff, 0.7);
     this.light.position.set(50, 200, 100);
     this.light.position.multiplyScalar(1.3);
 
@@ -53,8 +53,7 @@ export default class MainScene {
   }
 
   appendChild() {
-    this.container = document.createElement('div');
-    document.body.appendChild(this.container);
+    this.container = document.getElementById('flag');
     this.container.appendChild(this.renderer.domElement);
   }
 
@@ -62,7 +61,7 @@ export default class MainScene {
     this.renderer = new WebGLRenderer({ antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0x000000);
+    this.renderer.setClearColor(0xffffff);
 
     this.renderer.gammaInput = true;
     this.renderer.gammaOutput = true;

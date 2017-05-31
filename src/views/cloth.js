@@ -10,8 +10,9 @@ import {
 
 export default class ClothView {
 
-  constructor(cloth) {
+  constructor(cloth, src) {
     this.cloth = cloth;
+    this.src = src;
     this.createGeometry();
     this.loadTexture();
     this.createMaterial();
@@ -29,9 +30,17 @@ export default class ClothView {
 
   loadTexture() {
     const loader = new TextureLoader();
-    this.clothTexture = loader.load('textures/flag.jpg');
+    this.clothTexture = loader.load(this.src);
     this.clothTexture.anisotropy = 16;
     this.uniforms = { texture: { value: this.clothTexture } };
+  }
+
+  updateTexture(src) {
+    const loader = new TextureLoader();
+    this.clothTexture = loader.load(src);
+    this.clothTexture.anisotropy = 16;
+    this.uniforms = { texture: { value: this.clothTexture } };
+    this.material.map = this.clothTexture;
   }
 
   createMaterial() {
@@ -44,9 +53,9 @@ export default class ClothView {
 
   createMesh() {
     this.mesh = new Mesh(this.geometry, this.material);
-    this.mesh.position.set(0, 0, 0);
-    this.mesh.rotation.z = 2.0;
-    this.mesh.scale.set(3, 3, 3);
+    this.mesh.position.set(0, -450, 0);
+    //this.mesh.rotation.z = 2.0;
+    this.mesh.scale.set(1.42,1.42,1.42);
     this.mesh.castShadow = true;
 
     this.mesh.customDepthMaterial = new ShaderMaterial({
